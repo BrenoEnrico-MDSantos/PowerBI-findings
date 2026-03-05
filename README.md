@@ -4,7 +4,7 @@ Valuable DAX + Power Query annotations and snippets.
 ## Dynamic Date Table (march 05, 2026)
 Using PowerQuery , this code allows for dynamic generation of date columns, especially for a dedicated table apart from the facts or dimensions table.
 
-- Code adapted from [Fernan's Reusable Dynamic Calendar tutorial](https://www.youtube.com/watch?v=lTH2C--5xgo&t=1s).
+- Code adapted from [Fernan's Reusable Dynamic Calendar tutorial](https://youtu.be/p0ZCev6u024?si=0VQpUn5Own6EwSu6).
 
 > [!Note]
 > First and foremost, disable the **auto time intelligence generation**, as it creates hidden tables that exponentially pile up and bloat file size. Aside from allowing custom intervals, dedicated date tables are paramount for greater scalability and control.
