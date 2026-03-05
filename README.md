@@ -1,7 +1,7 @@
 # PowerBI-findings
 Valuable DAX + Power Query annotations and snippets.
 
-## Dynamic Date Table
+## Dynamic Date Table (march 05, 2026)
 Using PowerQuery , this code allows for dynamic generation of date columns, especially for a dedicated table apart from the facts or dimensions table.
 
 - Code adapted from [Fernan's Reusable Dynamic Calendar tutorial](https://www.youtube.com/watch?v=lTH2C--5xgo&t=1s).
