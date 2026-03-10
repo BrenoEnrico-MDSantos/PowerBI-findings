@@ -1,7 +1,7 @@
-# PowerBI-findings
+# 💡 PowerBI-findings
 Valuable DAX + Power Query annotations and snippets.
 
-## Dynamic Date Table (march 05, 2026)
+## 📆 Dynamic Date Table - DT (march 05, 2026)
 Using PowerQuery , this code allows for dynamic generation of date columns, especially for a dedicated table apart from the facts or dimensions table.
 
 - Code adapted from [Fernan's Reusable Dynamic Calendar tutorial](https://youtu.be/p0ZCev6u024?si=0VQpUn5Own6EwSu6).
@@ -65,4 +65,22 @@ let
 - After finishing the query writing, apply changes to the model; a new table will appear, with the created columns ready to be used with Time Intelligence functions
 
 > [!Tip]
-> Instead of writing or copy/pasting the script on every model, the best use would be sharing it in a group via creation of on-line **dataflows** (Blank Query, pasting the script and saving); all group participants will have access to it, and may import the Date table through the Get Data option in a model file.
+> Instead of writing or copy/pasting the script on every model, the best use would be sharing it in a group via creation of on-line **dataflows** (Blank Query, pasting the script and saving); all group participants will have access to it, and may import the DT through the Get Data option in a model file.
+
+### DT Update (march 09, 2026)
+
+- In order to maintain a **one to many relationship** between the formatted date columns and dimension/main table, unique values must be extracted from the dedicated Date table, thereby creating several **fact tables**, one for each column that requires specific cardinality (cannot contain duplicates).
+- In the following model, 3 tables were created from DT's columns; usually, the ```DISTINCT``` function should be enough to create a new column for new tables, (```Years = DISTINCT('Date'[Year])```, ```Month Name = DISTINCT('Date'[Month Name])```);
+
+![](https://github.com/BrenoEnrico-MDSantos/PowerBI-findings/blob/main/Relationship%20Model.png)
+
+>[!Note]
+> The best method to order _Month Number_ and _Month Name_ is to pair all distinct values of text and number in the same table (2 columns of 12 rows), but ```DISTINCT``` could not work like that for _Month Number_, raising the error **"_A table of multiple values was supplied where a single value was expected._"** Hence, this solution of multiple tables for year numbers, month numbers and months names could be better.
+
+- With cardinality and unicity in place, this "custom hierarchy" allows for filtering and regular operations you would expect from the DT; **number columns must obviosuly be formatted as integers, not text**, to then be sorted asc or desc.
+
+![](https://github.com/BrenoEnrico-MDSantos/PowerBI-findings/blob/main/Year%20Slicer.png)
+- So far, every new column adapted from the DT calls for an exclusive fact table, otherwise all values from the column will be considered unique, much like the main table's date column.
+
+> [!Warning]
+> **NEVER** use dimension table date fields as values. Use dedicated DT originated fact table columns with 1:* active relationship.
